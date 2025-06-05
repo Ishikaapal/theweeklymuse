@@ -31,7 +31,7 @@ SECRET_KEY = 'django-insecure-&#pt@xq*oyjtiwuyd8rrh6d&rdgelg)_0(s2@n0*px2jtwy(#5
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['https://theweeklymuse.onrender.com']
 
 
 # Application definition
@@ -87,14 +87,14 @@ WSGI_APPLICATION = 'theweeklymuse.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+BASE_DIR = Path(__file__).resolve().parent.parent
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
-
 
 
 # Password validation
