@@ -1,0 +1,64 @@
+<!-- EDIT PROFILE POPUP MODEL -->
+<div class="modal fade" id="EditProfileModal" tabindex="-1" aria-labelledby="EditProfileLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="EditProfileLabel">Edit Profile</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="editProfileForm" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <!-- Show validation errors here -->
+                    <div id="error-div" style="color: red; display: none;"></div>
+
+
+                    <div class="mb-3 imageProfile">
+                        <img id="profile-preview" src="{{request.user.profile.profile_pic.url }}" alt="Profile_picture">
+                        <input type="file" id="id_profile_pic" name="profile_pic" accept="image/*"
+                            onchange="previewImage(event)" class="form-control">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="fname" class="form-label">Full Name</label>
+                        <input type="text" class="form-control" id="fname" name="fname"
+                            value="{{request.user.profile.fname}}">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" name="email"
+                            value="{{request.user.profile.email}}">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Update Profile</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal for full-screen image -->
+<div class="modal fade" id="profileImageModal" tabindex="-1" aria-labelledby="profileImageLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+                <div class="profilepic">
+                    {% if request.user.profile.profile_pic.url %}
+                    <img id="profilePicShow" src="{{ request.user.profile.profile_pic.url }}" alt="Profile Picture">
+                    {% else %}
+                    <img id="profilePicShow" src="/media/profile/default.svg" alt="Profile Picture">
+                    {% endif%}
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

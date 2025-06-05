@@ -1,0 +1,36 @@
+
+{% if data.taskCreated %}
+<div class="row">
+    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 mb-3">
+        <div class="tab h-100">
+            <div class="tabTitle bg-primary bg-gradient">
+                <h3>Total Task Created</h3>
+            </div>
+            <div class="tabBody">
+                <h2>{{ data.taskCreated }} Tasks</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 mb-3">
+        <div class="tab h-100">
+            <div class="tabTitle bg-warning bg-gradient">
+                <h3>Pending Task</h3>
+            </div>
+            <div class="tabBody">
+                <h2>{{ data.Incomplete }} Tasks</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 mb-3">
+        <div class="tab h-100">
+            <div class="tabTitle bg-info bg-gradient">
+                <h3>Completed Task</h3>
+            </div>
+            <div class="tabBody">
+                <h2>{{ data.completed }} Tasks</h2>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+

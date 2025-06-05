@@ -1,0 +1,20 @@
+{% extends 'layouts/dashboard_layout.html' %}
+{% block title %}Task{% endblock %}
+
+{% block content %}
+
+<div class="row">
+  <div class="col-md-12">
+      {% if page_task %}
+      <div id="taskTable">
+        {% include "partials/table.html" %}
+        {% include "partials/pagination.html" %}
+      </div>        
+      {% else %}
+      <div class="centerElementDiv" id="noTaskDiv">
+        <h1>You Not Created Any Task.</h1>
+      </div>          
+      {% endif %}      
+  </div>
+</div>
+{% endblock %}

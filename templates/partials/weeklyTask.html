@@ -1,0 +1,77 @@
+{% load custom_tags %}
+<div class="row">
+    <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
+        <div class="weeklyTaskContainer">
+            <div class="taskWeeklycalander" id="currentWeek">
+                <i id="leftArrow" class="bi bi-caret-left-fill" data-bs-toggle="tooltip" data-bs-placement="left" title="Last Week"></i>
+                <span>This Week</span>
+                <i id="rightArrow" class="bi bi-caret-right-fill" data-bs-toggle="tooltip" data-bs-placement="right" title="Next Week"></i>
+            </div>
+            <div class="taskData">
+                <div>
+                    <i class="bi bi-clipboard-plus"></i>
+                    <span>Task Created : {{data.taskCreated}}</span>
+                </div>
+                <div>
+                    <i class="bi bi-check-square-fill"></i>
+                    <span>Task Completed :{{data.completed}} </span>
+                </div>
+                <div>
+                    <i class="bi bi-hourglass-split"></i>
+                    <span>Task Pending : {{data.Incomplete}} </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% for day in days_of_week %}
+    <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
+
+        <div class="weeklyTaskContainer">
+            <div class="weeklyTaskTitle">
+                {{ day }}                 
+            </div>
+
+            {% with tasks_by_day|get_item:day as tasks %}
+            {% if tasks %}
+            {% for task in tasks %}
+            <div class="weeklyTaskContent">
+                <div class="contentIcon"><i class="bi bi-pin-angle-fill"></i></div>
+                <div class="content">{{ task.name }}</div>
+                <div class="contentaction">
+                    {% if task.status == 'Incomplete'%}
+                    <i class="bi bi-hourglass-split text-secondary" data-bs-toggle="tooltip" title="Pending"></i>
+                    {% else %}
+                    <i class="bi bi-check-square-fill text-success" data-bs-toggle="tooltip" title="Completed"></i>
+                    {% endif %}
+                    {% if task.priority == 'Unmark' %}
+                    <i class='bi bi-bookmark-dash-fill text-info' data-bs-toggle="tooltip" title="Unmark"></i>
+                    {% elif task.priority == 'Flagged' %}
+                    <i class='bi bi-flag-fill text-warning' data-bs-toggle="tooltip" title="Flagged"></i>
+                    {% else %}
+                    <i class='bi bi-star-fill text-warning' data-bs-toggle="tooltip" title="Star"></i>
+                    {% endif %}
+
+                    <!-- Edit -->
+                    <a href="#" class="edit-task" data-task-id="{{ task.id }}" data-bs-toggle="modal"
+                        data-bs-target="#editTaskModal">
+                        <i class="bi bi-pencil-square text-secondary" title="Edit"></i>
+                    </a>
+                    <!-- Delete -->
+                    <a href="#" class="delete-task" data-task-id="{{ task.id }}" data-bs-toggle="modal"
+                        data-bs-target="#deleteTaskModal">
+                        <i class="bi bi-trash3-fill text-danger" title="Delete"></i>
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+            {% else %}
+            <div class="noContent">
+                <span>No tasks</span>
+            </div>
+            {% endif %}
+            {% endwith %}
+        </div>
+
+    </div>
+    {% endfor %}
+</div>

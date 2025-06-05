@@ -1,0 +1,10 @@
+{% extends 'layouts/dashboard_layout.html' %} {% load custom_tags %}
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+
+<div id="taskcard">
+    {% include "partials/weeklyTask.html" %}
+</div>
+
+{% endblock %}

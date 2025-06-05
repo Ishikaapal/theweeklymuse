@@ -1,0 +1,49 @@
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th>S.No</th>
+        <th>Task Name</th>
+        <th>Description</th>
+        <th>Finish Date</th>
+        <th>Status Priority</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for task in page_task %}
+      <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ task.name }}</td>
+        <td>{{ task.description }}</td>
+        <td>{{ task.finishDate }}</td>
+        
+        <td>
+            {% if task.status == 'Incomplete'%}
+                <i class="bi bi-hourglass-split text-secondary" data-bs-toggle="tooltip" title="Pending"></i>
+            {% else %}
+                <i class="bi bi-check-square-fill text-success" data-bs-toggle="tooltip" title="Completed"></i>
+             {% endif %}
+             {% if task.priority == 'Unmark' %}
+                <i class='bi bi-bookmark-dash-fill text-info' data-bs-toggle="tooltip" title="Unmark"></i>
+            {% elif task.priority == 'Flagged' %}
+                <i class='bi bi-flag-fill text-warning' data-bs-toggle="tooltip" title="Flagged"></i>
+            {% else %}
+                <i class='bi bi-star-fill text-warning' data-bs-toggle="tooltip" title="Star"></i>
+            {% endif %}
+        </td>
+            
+        <td>
+            <!-- Edit Button -->
+            <a href="#" class="edit-task" data-task-id="{{ task.id }}" data-bs-toggle="modal" data-bs-target="#editTaskModal">
+                <i class="bi bi-pencil-square text-secondary" data-bs-toggle="tooltip" title="Edit"></i>
+            </a>
+        
+            <!-- Delete Button -->
+            <a href="#" class="delete-task" data-task-id="{{ task.id }}" data-bs-toggle="modal" data-bs-target="#deleteTaskModal">
+                <i class="bi bi-trash3-fill text-danger" data-bs-toggle="tooltip" title="Delete"></i>
+            </a>            
+        </td>
+      </tr>
+        {% endfor %}
+    </tbody>          
+</table>

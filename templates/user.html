@@ -1,0 +1,31 @@
+{% extends 'layouts/layout.html' %}
+
+{% block content %}
+<div class="userBody">
+    <div class="userContainer">
+        <div class="formBox">
+            <form action="{% url 'login' %}" method="POST">
+                <h1>Login</h1>
+                <div class="inputBox">
+                    <input type="text" class="form-control" id="" name="" placeholder="Enter Username" required>
+                    <i class='bx bxs-user'></i>
+                </div>
+                <div class="inputBox">
+                    <input type="password" class="form-control" id="" placeholder="Enter Password" name="" required>
+                    <i class='bx bxs-lock-alt' ></i>
+                </div>
+                <button type="submit" class="userBtn">Login</button>
+
+            </form>
+        </div>
+        <div class="contentBox">
+            <div class="contentPannel left-pannel">
+                <h1>Welcome Back!</h1>
+                <p>Don't have an account?</p>
+                <a href="{% url 'register'%}" class="userBtn">Register</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

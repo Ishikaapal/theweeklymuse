@@ -1,0 +1,70 @@
+{% load custom_tags %}
+
+<!-- Month summary -->
+<div class="row">
+  <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
+    <div class="calendarDetail">
+      <button id="prevMonth" data-bs-toggle="tooltip" data-bs-placement="left" title="Last Month">
+        <i class="bi bi-caret-left-fill"></i>
+      </button>
+      <div id="currentMonth">
+        <span>{{ data.month|date:"F" }} , {{ current_year }}</span>
+      </div>
+      <button id="nextMonth" data-bs-toggle="tooltip" data-bs-placement="right" title="Next Month">
+        <i class="bi bi-caret-right-fill"></i>
+      </button>
+    </div>
+  </div>
+
+  <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
+    <div class="calendarDetail">
+      <i class="bi bi-calendar-week-fill" data-bs-toggle="tooltip"></i>
+      Created Task: {{ data.taskCreated }}
+    </div>
+  </div>
+
+  <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
+    <div class="calendarDetail">
+      <i class="bi bi-hourglass-split" data-bs-toggle="tooltip"></i>
+      Pending Task: {{ data.Incomplete }}
+    </div>
+  </div>
+</div>
+
+<!-- Calendar Grid -->
+<div class="calendarContainer">
+  <div class="row">
+    {% for day in days_in_month %}
+      {% with day_str=day|stringformat:"02d" %}
+        {% with date_str=current_year|stringformat:"s"|add:"-"|add:current_month|stringformat:"s"|add:"-"|add:day_str %}
+          {% with day_tasks=tasks_by_day|get_item:date_str %}
+            <div class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-6">
+              <div class="taskMonthly {% if date_str == formatted_today %}today{% endif %}">
+                <div class="dayNumber">{{ day }}</div>
+
+                {% if day_tasks %}
+                  {% for task in day_tasks %}
+                    <div class="taskDetails">
+                      <div class="icon">
+                        <!-- Edit -->
+                        <a href="#" class="edit-task" data-task-id="{{ task.id }}" data-bs-toggle="modal"
+                        data-bs-target="#editTaskModal">
+                        <i class="bi bi-eye-fill" title="Edit"></i>
+                        </a>
+                      </div>
+                      <div class="taskName">{{ task.name }}</div>
+                    </div>
+                  {% endfor %}
+                {% else %}
+                  <div class="noTask">
+                    <span>No Task</span>
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+          {% endwith %}
+        {% endwith %}
+      {% endwith %}
+    {% endfor %}
+  </div>
+</div>

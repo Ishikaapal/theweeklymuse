@@ -1,0 +1,56 @@
+{% extends 'layouts/layout.html' %}
+{% block title %}Login Page{% endblock %}
+{% block content %}
+{% if messages %}
+    <div class="alert alert-success alert-dismissible fade show popdiv" role="alert">
+        {% for message in messages %}
+            {{ message }}
+        {% endfor %}
+    </div>
+{% endif %}
+
+<div class="userBody">
+    <div class="userContainer">
+        <div class="formBox">
+            <form action="{% url 'login' %}" method="POST">
+                {% csrf_token %}
+                <h1>Login</h1>
+
+                <!-- USERNAME FIELD -->
+                <div class="inputBox">
+                    <input type="text" class="form-control" name="username" value="{{ form.username.value }}" placeholder="Username" required />
+                    <i class='bx bxs-user'></i>
+                </div>
+        
+                <!-- Password Field -->
+                <div class="inputBox">
+                    <input type="password" class="form-control" name="password" placeholder="Password" required />
+                    <i class='bx bxs-lock-alt'></i>
+                </div>       
+                
+        
+                <!-- Submit Button -->
+                <button type="submit" class="userBtn">Login</button>
+
+                <!-- General Authentication Errors -->
+                {% if form.non_field_errors %}
+                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                    <span><b>Eroor! </b>Incoorect Username or Password.</span>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  </div>                
+                {% endif %}
+
+            </form>
+        </div>
+        <div class="contentBox">
+            <div class="contentPannel left-pannel">
+                <h1>Welcome Back!</h1>
+                <p>Don't have an account?</p>
+                <a href="{% url 'register'%}" class="userBtn">Register</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

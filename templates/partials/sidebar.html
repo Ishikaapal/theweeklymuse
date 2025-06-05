@@ -1,0 +1,76 @@
+{% load static %}
+<!-- SIDEBAR HTML CODE -->
+<nav class="sidebar" id="sidebar">
+    <div class="sidebar__container">
+       
+        <div class="sidebar__user" id="sidebar_user">                 
+            <div class="sidebar__img" data-bs-toggle="modal" data-bs-target="#profileImageModal">
+                <img src="{{request.user.profile.profile_pic.url }}" alt="Profile_picture">
+            </div>
+
+            <div class="sidebar__info">
+                <h3 style="text-transform: uppercase;">{{ request.user.username}}</h3>
+                {%if request.user.profile.email %}
+                <span>
+                    <i class="bi bi-envelope"></i>
+                    <span>{{request.user.profile.email}}</span>
+                </span>
+                {% endif%}
+            </div>
+        </div>
+
+        <div class="sidebar__content">
+            <div>
+                <h3 class="sidebar__title">MANAGE</h3>
+                     
+                <div class="sidebar__list">
+                    <a href="{% url 'dashboard' %}" class="sidebar__link active-link">
+                        <i class='bx bxs-dashboard' data-bs-toggle="tooltip" data-bs-placement="right" title="Dashboard" ></i>
+                        <span>Dashboard</span>
+                    </a>
+
+                    <a href="{% url 'task' %}" class="sidebar__link">
+                        <i class='bx bx-task' data-bs-toggle="tooltip" data-bs-placement="right" title="Task"></i>
+                        <span>Task</span>
+                    </a>   
+                    
+                    <a href="{% url 'calendar' %}" class="sidebar__link">
+                        <i class='bi bi-calendar3' data-bs-toggle="tooltip" data-bs-placement="right" title="Calendar"></i>
+                        <span>Calendar</span>
+                    </a> 
+
+                </div>
+            </div>
+
+            <div>
+                <h3 class="sidebar__title">SEETINGS</h3>
+
+                <div class="sidebar__list">
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#EditProfileModal" class="sidebar__link">
+                        <i class='bi bi-pencil-fill' data-bs-toggle="tooltip" data-bs-placement="right" title="Edit Profil"></i>
+                        <span>Edit Profile</span>
+                    </a>
+
+                    <a href="#" class="sidebar__link" data-bs-toggle="modal" data-bs-target="#updatePasswordModal">
+                        <i class='bi bi-file-earmark-lock-fill' data-bs-toggle="tooltip" data-bs-placement="right" title="Change Password"></i>
+                        <span>Change Password</span>
+                    </a>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="sidebar__actions">
+
+            <a id="theme-button" class="sidebar__link sidebar__theme">
+                <i class="bi bi-moon-fill" data-bs-toggle="tooltip" data-bs-placement="right" title="Theme"></i>
+                <span>Theme</span>
+            </a>
+            
+            <a href="{% url 'logout' %}" class="sidebar__link">
+                <i class='bx bxs-log-out' data-bs-toggle="tooltip" data-bs-placement="right" title="Logout"></i>
+                <span>Logout</span>
+            </a>
+        </div>
+    </div>
+</nav>
