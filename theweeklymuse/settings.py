@@ -32,7 +32,7 @@ SECRET_KEY = 'django-insecure-&#pt@xq*oyjtiwuyd8rrh6d&rdgelg)_0(s2@n0*px2jtwy(#5
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://theweeklymuse.onrender.com']
+ALLOWED_HOSTS = ['theweeklymuse.onrender.com']
 
 
 # Application definition
