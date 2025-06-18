@@ -12,8 +12,10 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 import os
+from dotenv import load_dotenv
 import dj_database_url
 
+load_dotenv()
 
 
 
@@ -86,14 +88,24 @@ WSGI_APPLICATION = 'theweeklymuse.wsgi.application'
 
 
 
-# Database
-# https://docs.djangoproject.com/en/5.1/ref/settings/#databases
+DATABASE_URL = os.environ.get('DATABASE_URL')
 
-DATABASES = {
-    'default': dj_database_url.config(
-        default=os.environ.get('DATABASE_URL')
-    )
-}
+if DATABASE_URL:
+    DATABASES = {
+        'default': dj_database_url.config(
+            default=DATABASE_URL,
+            conn_max_age=600,
+            ssl_require=True
+        )
+    }
+else:
+    print("WARNING: No DATABASE_URL environment variable set. Falling back to SQLite.")
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 
 

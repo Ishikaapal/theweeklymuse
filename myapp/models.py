@@ -24,18 +24,21 @@ class Task(models.Model):
 class Profile(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE)
     fname = models.CharField(max_length=100)
-    email = models.EmailField(unique=True)
+    email = models.EmailField(default='example@gmail.com', blank=True, null=True)
     profile_pic =models.ImageField(upload_to='profile',default='profile/default.svg')
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
+        email = instance.email.strip() if instance.email else 'example@gmail.com'
+
         full_name = f"{instance.first_name} {instance.last_name}".strip()
         Profile.objects.create(
-            user=instance, 
-            email=instance.email, 
+            user=instance,
+            email=email,
             fname=full_name if full_name else instance.username
         )
+
 
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
