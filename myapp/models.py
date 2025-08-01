@@ -25,7 +25,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE)
     fname = models.CharField(max_length=100)
     email = models.EmailField(default='example@gmail.com', blank=True, null=True)
-    profile_pic =models.ImageField(upload_to='profile',default='profile/default.svg')
+    profile_pic =models.ImageField(upload_to='profile_pics/',default='static/images/default.svg')
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
